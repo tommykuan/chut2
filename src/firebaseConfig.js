@@ -1,6 +1,6 @@
 const firebaseConfig = {
     apiKey: "AIzaSyA5ZNxod7Id7oQLNAPC8aDO7maOoNcR69U",
-    authDomain: "chut2-c2958.firebaseapp.com",
+    authDomain: "chutchut.live",
     databaseURL: "https://chut2-c2958-default-rtdb.firebaseio.com",
     projectId: "chut2-c2958",
     storageBucket: "chut2-c2958.appspot.com",
