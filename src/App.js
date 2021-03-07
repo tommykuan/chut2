@@ -1,14 +1,12 @@
 import './App.css'
 import React, { useEffect, useState } from 'react'
 import Clock from './Clock'
-// import Arrivals from './Arrivals'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import firebaseConfig from './firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 firebase.initializeApp(firebaseConfig)
 
@@ -52,9 +50,37 @@ function SignIn() {
       })
   }
   return (
-    <button className="sign-in" onClick={signInWithGoogle}>
-      Sign in with Google
-    </button>
+    <>
+      <div>
+        <h1 className="time">Welcome to Chut-Chut</h1>
+        <p className="description">
+          This web app stores bus stop #s in{' '}
+          <a className="description" href="https://firebase.google.com/">
+            Google Firebase
+          </a>{' '}
+          to display{' '}
+          <a
+            className="description"
+            href="https://www.metrotransit.org/nextrip"
+          >
+            NexTrip
+          </a>{' '}
+          all in one page. I created this app for my fellow public commuters to
+          conveniently check for arrival times because I am tired of waiting for
+          the{' '}
+          <a className="description" href="https://www.metrotransit.org/">
+            MetroTransit app
+          </a>{' '}
+          to load. Sign in to start feeling convenient. Best performance on a
+          mobile device.
+        </p>
+      </div>
+      <div>
+        <button className="sign-in" onClick={signInWithGoogle}>
+          Sign in with Google
+        </button>
+      </div>
+    </>
   )
 }
 
@@ -140,67 +166,76 @@ function removeStop(busStopID) {
 }
 
 function Arrivals(props) {
-  return (
-    <div>
-      {props.allStops.map((stops, index) => {
-        return (
-          <div key={`${props.busStops[index]}_${index}`}>
-            <h2>
-              <a
-                href={`https://www.metrotransit.org/nextrip/${props.busStops[index]}`}
-                target="_blank"
-              >
-                {props.busStops[index]}
-              </a>
+  if (props.allStops.length == 1 || props.allStops.length == 0 ) {
+    return <div> <h2>Loading...</h2></div>
+  } else {
+    return (
+      <div>
+        {props.allStops.map((stops, index) => {
+          return (
+            <div key={`${props.busStops[index]}_${index}`}>
+              <h2>
+                <a
+                  className="a-btn"
+                  href={`https://www.metrotransit.org/nextrip/${props.busStops[index]}`}
+                  target="_blank"
+                >
+                  {props.busStops[index]}
+                </a>
 
-              <button
-                className="delete"
-                type="button"
-                onClick={(e) => removeStop(props.busStops[index])}
-              >
-                X
-              </button>
-            </h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Bus No.</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {(() => {
-                  if (stops && !stops.length) {
-                    return (
-                      <tr>
-                        <td> - </td>
-                        <td> - </td>
-                      </tr>
-                    )
-                  } else if (stops) {
-                    return stops.slice(0, 5).map((times, tIndex) => {
+                <button
+                  className="delete"
+                  type="button"
+                  onClick={(e) => removeStop(props.busStops[index])}
+                >
+                  &#10005;
+                </button>
+              </h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Bus No.</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(() => {
+                    if (stops && !stops.length) {
                       return (
-                        <tr
-                          key={`${times.Route}_${times.DepartureTime}_${times.RouteDirection}`}
-                        >
-                          <td className={`td ${times.Actual ? 'active' : ''}`}>
-                            {times.Route}
-                          </td>
-                          <td className={`td ${times.Actual ? 'active' : ''}`}>
-                            {times.DepartureText}
-                          </td>
+                        <tr>
+                          <td> - </td>
+                          <td> - </td>
                         </tr>
                       )
-                    })
-                  }
-                })()}
-              </tbody>
-            </table>
-          </div>
-        )
-      })}
-    </div>
-  )
+                    } else if (stops) {
+                      return stops.slice(0, 5).map((times, tIndex) => {
+                        return (
+                          <tr
+                            key={`${times.Route}_${times.DepartureTime}_${times.RouteDirection}`}
+                          >
+                            <td
+                              className={`td ${times.Actual ? 'active' : ''}`}
+                            >
+                              {times.Route}
+                            </td>
+                            <td
+                              className={`td ${times.Actual ? 'active' : ''}`}
+                            >
+                              {times.DepartureText}
+                            </td>
+                          </tr>
+                        )
+                      })
+                    }
+                  })()}
+                </tbody>
+              </table>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 }
 
 const App = () => {
@@ -259,7 +294,7 @@ const App = () => {
       auth.currentUser && (
         <button
           type="button"
-          className="delete"
+          className="sign-out"
           onClick={() => {
             auth.signOut().then(setAllStops(initAllStops))
           }}
@@ -284,11 +319,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <Clock />
-      </header>
+      <header className="App-header"></header>
       {user ? (
-        <>
+        <div className="main-disp">
+          <Clock />
           <div>
             <h2>
               Hello {auth.currentUser.displayName} <SignOut />
@@ -305,7 +339,7 @@ const App = () => {
             allStops={allStops}
             busStops={localBusStops}
           />
-        </>
+        </div>
       ) : (
         <SignIn />
       )}

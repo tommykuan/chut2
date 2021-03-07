@@ -2,169 +2,229 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
+
 
 /* Firefox */
 
 input[type='number'] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 html,
 body {
-  height: 100%;
-  overflow: auto;
-  background-color: #141824;
-  color: #dbedf3;
+    height: 100%;
+    overflow: auto;
+    background-color: #141824;
+    color: #dbedf3;
+    font-family: 'Nunito';
 }
 
 h1 {
-  font-size: 65px;
-  font-family: 'Nunito', monospace;
-  margin: 10px;
-  margin-top: 30px;
+    font-size: 45px;
+    font-family: 'Nunito', monospace;
+    margin: 10px;
+    margin-top: 30px;
 }
 
 h1.time {
-  color: #dbedf3;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  display: flex;
-  padding: 10px;
+    color: #dbedf3;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    padding: 10px;
 }
 
 p.signed-in-with {
-  margin: 10px;
+    margin: 10px;
 }
 
-a:link,
-a:visited {
-  background-color: #404b69;
-  box-shadow: 0 5px 0 #242b3b;
-  color: #dbedf3;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 0px;
-  border-radius: 10px;
+p.description {
+    color: #dbedf3;
+    text-align: center;
+    display: block;
+    font-size: 1.2em;
+    margin: 9px;
 }
 
-a:hover,
-a:active {
-  background-color: #242b3b;
-  cursor: pointer;
+a {
+    color: #8896b8;
+}
+
+a:hover {
+    color: #9bb7f3;
+}
+
+a.a-btn:link,
+a.a-btn:visited {
+    background-color: #404b69;
+    box-shadow: 0 5px 0 #242b3b;
+    color: #dbedf3;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0px;
+    border-radius: 10px;
+}
+
+a.a-btn:hover,
+a.a-btn:active {
+    background-color: #242b3b;
+    cursor: pointer;
 }
 
 label {
-  font-family: 'Nunito';
-  margin: 15px;
+    font-family: 'Nunito';
+    margin: 15px;
 }
 
 input {
-  color: #161616;
-  padding: 12px;
-  border-radius: 5px;
-  font-size: 1.2em;
+    color: #161616;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 1.1em;
 }
 
 button.add {
-  background-color: #404b69;
-  box-shadow: 0 5px 0 #242b3b;
-  color: #dbedf3;
-  font-family: 'Nunito';
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 5px;
-  margin: 5px;
+    background-color: #404b69;
+    box-shadow: 0 5px 0 #242b3b;
+    color: #dbedf3;
+    font-family: 'Nunito';
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    margin: 5px;
 }
 
 button.add:hover {
-  background-color: #242b3b;
-  cursor: pointer;
+    background-color: #242b3b;
+    cursor: pointer;
 }
 
 button.add:disabled {
-  background-color: grey;
-  color: rgb(214, 213, 213);
-  box-shadow: none;
+    background-color: grey;
+    color: rgb(214, 213, 213);
+    box-shadow: none;
 }
 
 button.delete {
-  background-color: rgb(211, 73, 73);
-  box-shadow: 0 5px 0 darkred;
-  color: rgb(65, 1, 1);
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  height: 50px;
-  width: 50px;
-  margin: 15px;
-  border-radius: 10px;
+    background-color: rgb(211, 73, 73);
+    box-shadow: 0 5px 0 darkred;
+    color: rgb(65, 1, 1);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    margin: 15px;
+    border-radius: 10px;
 }
 
 button.delete:hover {
-  background-color: darkred;
-  color: white;
+    background-color: darkred;
+    color: white;
+}
+
+button.sign-out {
+    background-color: rgb(216, 163, 47);
+    box-shadow: 0 2px 0 rgb(136, 96, 11);
+    font-size: 15px;
+    color: rgb(65, 1, 1);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    border-radius: 8px;
+}
+
+button.sign-out:hover {
+    background-color: rgb(228, 179, 74);
 }
 
 button.sign-in {
-  background-color: #404b69;
-  box-shadow: 0 5px 0 #242b3b;
-  color: #dbedf3;
-  font-family: 'Nunito';
-  font-size: large;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 15px;
-  margin: 0;
-  position: absolute;
-  padding: 20px;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+    background-color: #404b69;
+    box-shadow: 0 5px 0 #242b3b;
+    color: #dbedf3;
+    font-family: 'Nunito';
+    font-size: 1.1em;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    border-radius: 15px;
+    margin: 0;
+    position: absolute;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, 80%);
+}
+
+button.sign-in:hover {
+    background-color: #2d354b;
 }
 
 h2 {
-  font-size: 40px;
-  font-family: 'Nunito', monospace;
-  color: #ecebeb;
-  margin: 10px;
+    font-size: 30px;
+    font-family: 'Nunito', monospace;
+    color: #ecebeb;
+    margin: 15px;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
-  table-layout: auto;
-  font-family: 'Nunito', monospace;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+    font-family: 'Nunito', monospace;
 }
 
 th,
 td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid rgb(65, 65, 65);
-  font-size: 30px;
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid rgb(65, 65, 65);
+    font-size: 25px;
 }
 
 td.active {
-  background-color: #00818a;
+    background-color: #00818a;
 }
 
 tr:hover {
-  background-color: #ffffff34;
-  color: whitesmoke;
+    background-color: #ffffff34;
+    color: whitesmoke;
 }
 
 th {
-  background-color: #283149;
-  color: #ecebeb;
+    background-color: #283149;
+    color: #ecebeb;
+}
+
+.footer {
+    font-size: 1em;
+    position: fixed;
+    /* padding: 7px; */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #0a0b11;
+    color: white;
+    text-align: center;
+    margin-top: -50px;
+}
+
+.main-disp {
+  margin-bottom: 50px;
+}
+
+a.tommy {
+  color: #adc4f7;
 }
