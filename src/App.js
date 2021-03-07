@@ -63,7 +63,7 @@ function StopInput() {
 
   async function addStopToDoc(e) {
     e.preventDefault()
-    console.log(newStop)
+    // console.log(newStop)
     const response = await fetch(
       `https://svc.metrotransit.org/NexTrip/${newStop}?format=json`
     )
@@ -236,7 +236,7 @@ const App = () => {
   const retrieveData = async () => {
     let data = await getAllStops(localBusStops)
     setAllStops(data)
-    console.log(allStops)
+    // console.log(allStops)
 
     if (user && auth.currentUser.uid) {
       let gg = await firestore
