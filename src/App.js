@@ -24,7 +24,7 @@ function SignIn() {
       .collection('accounts')
       .doc(auth.currentUser.uid)
       .get()
-      .then((doc) => {
+      .then(async (doc) => {
         if (doc.exists) {
           console.log('account exists')
 
@@ -41,7 +41,7 @@ function SignIn() {
             busStops: [],
           }
 
-          firebase
+          await firebase
             .firestore()
             .collection('accounts')
             .doc(auth.currentUser.uid)
@@ -99,16 +99,19 @@ function StopInput() {
         .collection('accounts')
         .doc(auth.currentUser.uid)
         .get()
-        .then((doc) => {
+        .then(async (doc) => {
           if (doc.exists) {
             let userRef = firebase
               .firestore()
               .collection('accounts')
               .doc(auth.currentUser.uid)
 
-            userRef.update({
+            await userRef.update({
               busStops: firebase.firestore.FieldValue.arrayUnion(newStop),
             })
+
+            console.log(`added ${newStop}`);
+            
           }
         })
       e.target.reset()
@@ -149,14 +152,14 @@ function removeStop(busStopID) {
     .collection('accounts')
     .doc(auth.currentUser.uid)
     .get()
-    .then((doc) => {
+    .then(async (doc) => {
       if (doc.exists) {
         let userRef = firebase
           .firestore()
           .collection('accounts')
           .doc(auth.currentUser.uid)
 
-        userRef.update({
+        await userRef.update({
           busStops: firebase.firestore.FieldValue.arrayRemove(
             busStopID.toString()
           ),
@@ -165,10 +168,32 @@ function removeStop(busStopID) {
     })
 }
 
+var timer = 0
+
 function Arrivals(props) {
-  if (props.allStops.length == 1 || props.allStops.length == 0 ) {
-    return <div> <h2>Loading...</h2></div>
-  } else {
+  if (props.allStops.length == 0) {
+    var output = 'Fetching bus stops...'
+    timer++
+    console.log(timer);
+    if (timer >= 10) {
+      output = 'No bus stops in database'
+      return (
+        <div>
+          {' '}
+          <h2>{`${output}`}</h2>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div>
+          {' '}
+          <h2>{`${output}`}</h2>
+        </div>
+      )
+    }
+  } 
+  else {
     return (
       <div>
         {props.allStops.map((stops, index) => {
@@ -245,7 +270,7 @@ const App = () => {
 
   const initAllStops = [[{ Actual: false, DepartureText: 'Loading...' }]]
 
-  const [allStops, setAllStops] = useState([initAllStops])
+  const [allStops, setAllStops] = useState([])
 
   const getAllStops = async (localBusStops) => {
     const data = await Promise.all(
