@@ -174,8 +174,8 @@ function Arrivals(props) {
   if (props.allStops.length == 0) {
     var output = 'Fetching bus stops...'
     timer++
-    console.log(timer);
-    if (timer >= 10) {
+    // console.log(timer);
+    if (timer >= 5) {
       output = 'No bus stops in database'
       return (
         <div>
