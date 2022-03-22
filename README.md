@@ -1,7 +1,7 @@
 # Chut-Chut
 This web app stores bus stop IDs in [Google Firebase](www.firebase.google.com) to display [NexTrip](https://www.metrotransit.org/nextrip) all in one page. I created this app for my fellow public commuters to conveniently check for arrival times because I am tired of waiting for the [MetroTransit](https://www.metrotransit.org) app to load. Sign in to start feeling convenient. Best performance on a mobile device. In the progress of organizing React components now...
 
-Took it down because I'm out of budget
+Update March 2022: I took it down because I'm out of budget
 <hr>
 
 # Getting Started with Create React App
